@@ -1,32 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <ul class="footer-bar">
+      <li class="footer-bar-item"><router-link to="/">首页</router-link></li>
+      <li class="footer-bar-item"><router-link to="/classify">分类</router-link></li>
+      <li class="footer-bar-item"><router-link to="/shopcar">购物车</router-link></li>
+      <li class="footer-bar-item"><router-link to="/mine">我的</router-link></li>
+    </ul>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  .footer-bar{
+    display: flex;
+    background: chocolate;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 1rem;
+     // scss语法
+    &-item{
+      flex-grow: 1;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1rem;
     }
   }
-}
 </style>
