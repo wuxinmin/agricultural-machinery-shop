@@ -16,7 +16,8 @@ Vue.config.productionTip = false
 
 import './assets/css/reset.css'
 import './assets/js/rem'
-
+// 引入mockjs
+import './mock/mock.js'
 new Vue({
   router,
   store,

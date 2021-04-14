@@ -31,9 +31,10 @@
        <h1 class="recommend-title">推荐商品</h1>
        <ul>
          <li v-for="(item, index) in recommendLists" :key="index" class="recommend-list">
-           <img :src="item.nightPictureUrl" alt="">
-           <p>{{item.date}}</p>
-           <div>温度是{{item.temperature}}</div>
+           <img :src="item.img" alt="">
+           <p>{{item.name}}</p>
+           <div>温度是{{item.owner}}</div>
+           <div>￥{{item.price}}</div>
          </li>
        </ul>
      </div>
@@ -43,6 +44,9 @@
 <script>
   import 'swiper/dist/css/swiper.css'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import url from '@/service.config.js'
+
+  import axios from 'axios'
   export default {
    data() {
      return {
@@ -94,69 +98,21 @@
       swiperOptions: {
         slidesPerView: 3
       },
-      recommendLists: [
-        {
-            date: "今天（周三）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/duoyun.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "多云",
-            wind: "微风",
-            temperature: "23℃"
-        },
-        {
-            date: "明天（周四）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/leizhenyu.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/zhongyu.png",
-            weather: "雷阵雨转中雨",
-            wind: "微风",
-            temperature: "29～22℃"
-        },
-        {
-            date: "后天（周五）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/yin.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "阴转多云",
-            wind: "微风",
-            temperature: "31～23℃"
-        },
-        {
-            date: "大后天（周六）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/duoyun.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "多云",
-            wind: "微风",
-            temperature: "31～24℃"
-        },
-        {
-            date: "明天（周四）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/leizhenyu.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/zhongyu.png",
-            weather: "雷阵雨转中雨",
-            wind: "微风",
-            temperature: "29～22℃"
-        },
-        {
-            date: "后天（周五）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/yin.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "阴转多云",
-            wind: "微风",
-            temperature: "31～23℃"
-        },
-        {
-            date: "大后天（周六）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/duoyun.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "多云",
-            wind: "微风",
-            temperature: "31～24℃"
-        },
-      ]
+      recommendLists: []
      }
    },
    components: {
      swiper,
      swiperSlide
+   },
+   created() {
+    let that = this
+    // axios.get('http://agricultural.com/getRecommendLists')
+    axios.get(url.getRecommendLists)
+    .then(function(response) { // 箭头函数解决更好
+      console.log(response);
+      that.recommendLists = response.data;
+    })
    }
   };
 </script>
@@ -228,6 +184,7 @@
 
     // 弹性盒模型解决
     ul{
+      background: #fff;
       display: flex;
       // 按照所设宽度来分
       flex-wrap: wrap;
