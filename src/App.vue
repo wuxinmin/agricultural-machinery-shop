@@ -46,9 +46,11 @@
   };
 </script>
 <style lang="scss">
+  #app{
+    // background: ;
+  }
   .footer-bar{
     display: flex;
-    background: chocolate;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -60,5 +62,11 @@
       font-size: 0.28rem;
       line-height: 1rem;
     }
+  }
+  .van-hairline--top-bottom {
+    background: linear-gradient(-5deg,#99ff99,#ffffff);
+  }
+  .van-tabbar-item--active {
+    background: #66FE69;
   }
 </style>
