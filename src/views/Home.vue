@@ -32,9 +32,11 @@
        <ul>
          <li v-for="(item, index) in recommendLists" :key="index" class="recommend-list">
            <img :src="item.img" alt="">
-           <p>{{item.name}}</p>
-           <div>温度是{{item.owner}}</div>
-           <div>￥{{item.price}}</div>
+           <div class="recommend-list-details">
+            <p>{{item.name}}</p>
+            <div>温度是{{item.owner}}</div>
+            <div>￥{{item.price}}</div>
+           </div>
          </li>
        </ul>
      </div>
@@ -196,6 +198,9 @@
       img{
         width: 2.5rem;
         height: 2.5rem;
+      }
+      &-details{
+        padding: 0 0.2rem;
       }
     }
   }
