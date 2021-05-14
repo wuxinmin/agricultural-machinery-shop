@@ -8,8 +8,8 @@ import store from './store'
 // Vue.use(Vant);
 
 // 按需引入
-import { Button, Icon, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Lazyload, TreeSelect, Card, Stepper } from 'vant';
-Vue.use(Button).use(Icon).use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(TreeSelect).use(Card).use(Stepper);
+import { Button, Icon, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Lazyload, TreeSelect, Card, Stepper,Tab, Tabs, Field, CellGroup, Toast  } from 'vant';
+Vue.use(Button).use(Icon).use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(TreeSelect).use(Card).use(Stepper).use(Tab).use(Tabs).use(Field).use(CellGroup).use(Toast);
 
 
 Vue.config.productionTip = false
