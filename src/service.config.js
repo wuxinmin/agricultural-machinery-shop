@@ -6,7 +6,9 @@ const URL = {
   getRecommendLists: MOCKURL + 'getRecommendLists',
   getHotProjuct: MOCKURL + 'getHotProjuct',
   // 注册的端口,user对应的就是后端的控制器也就是MVC中的C
-  registUser: SERVICEURL + 'user/registUser'
+  registUser: SERVICEURL + 'user/registUser',
+  // 登录的端口
+  loginUser: SERVICEURL + 'user/loginUser'
 }
 
 // 导出 

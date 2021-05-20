@@ -3,7 +3,7 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <van-nav-bar title="首页" class="commonHeader">
       <van-icon name="search" slot="left" color="#ee0a24"></van-icon>
-      <van-icon name="shopping-cart-o" slot="right" color="#ee0a24"></van-icon>
+      <van-icon slot="right" color="#ee0a24" @click="$router.push('/mine')">{{userInfo.userName}}</van-icon>
     </van-nav-bar>
     <!-- 轮播图 -->
      <div class="carousel">
@@ -21,7 +21,7 @@
         <swiper-slide v-for="(item, index) in hotLists" :key="index">
           <div class="hot-swiper-content">
             <img :src="item.dayPictureUrl" :alt="item.weather">
-            <div>皮袍邵逸夫i我意思u覅赛哦地方,温度是{{ item.temperature }}</div>
+            <div>皮地方,温度是{{ item.temperature }}</div>
           </div>
         </swiper-slide>
        </swiper>
@@ -47,7 +47,8 @@
   import 'swiper/dist/css/swiper.css'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import url from '@/service.config.js'
-
+  // 从vuex中取值
+  import {mapState} from 'vuex'
   import axios from 'axios'
   export default {
    data() {
@@ -115,6 +116,10 @@
       console.log(response);
       that.recommendLists = response.data;
     })
+   },
+   computed: {
+    //  映射
+     ...mapState(['userInfo'])
    }
   };
 </script>

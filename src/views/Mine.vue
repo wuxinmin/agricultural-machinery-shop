@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <van-tabs>
+    <van-tabs v-if="userInfo.userName == '未登录'">
       <van-tab title="登录">
         <!-- required 必填 clearable删除-->
         <van-cell-group>
@@ -21,8 +21,16 @@
           />
         </van-cell-group>
         <div>
-          <van-button type="primary" size="normal" style="width:6rem; margin-left:0.2rem">登录</van-button>
+          <van-button style="width:5rem; margin-left:0.7rem; height: 0.7rem; margin-top: 0.6rem;border-radius: 0.3rem;" 
+                      type="primary" 
+                      size="normal" 
+                      @click="loginHandle">登录</van-button>
         </div>
+        <van-overlay :show="show">
+          <div class="wrapper" @click.stop>
+              <van-loading color="#0094ff" text-color="#0094ff" vertical >加载中</van-loading>
+          </div>
+        </van-overlay>
       </van-tab>
       <van-tab title="注册">
         <van-cell-group>
@@ -43,30 +51,44 @@
           />
         </van-cell-group>
         <div>
-          <van-button style="width:5rem; margin-left:0.7rem; height: 0.7rem; margin-top: 0.6rem" 
+          <van-button style="width:5rem; margin-left:0.7rem; height: 0.7rem; margin-top: 0.6rem; border-radius: 0.3rem;" 
                       type="primary" 
                       size="normal" 
                       @click="registHandle">注册</van-button>
         </div>
       </van-tab>
     </van-tabs>
+    <div v-if="userInfo.userName != '未登录'">
+      我的
+    </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
 // 引入总的端口文件 @指的是src
 import url from '@/service.config.js'
+// 引入vuex来保存用户登录状态
+import {mapActions} from "vuex"
+// 从vuex中取值
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
       loginUsername: '',
       loginPassword: '',
       registUsername: '',
-      registPassword: ''
+      registPassword: '',
+      show: false
 
     };
   },
+  computed: {
+    //  映射mutations写入computed
+     ...mapState(['userInfo'])
+  },
   methods: {
+    // 将store/index.js 中的方法映射出来，想映射那个，映射actions写入methods
+    ...mapActions(['loginAction']),
     // 注册的处理方法
     registHandle() {
       axios({
@@ -89,10 +111,62 @@ export default {
         console.log(err);
         this.$toast.fail('注册失败');
       })
+    },
+
+    // 登录的处理方法
+    loginHandle() {
+      this.show = true
+      axios({
+        url: url.loginUser,
+        method: "post",
+        data: {
+          userName: this.loginUsername,
+          password: this.loginPassword
+        }
+      }).then(res=>{
+        console.log(res);
+        if(res.data.code == 200){
+          // 模拟
+          new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+              resolve();
+            },1000)
+          }).then(()=>{
+            this.$toast.success('登录成功');
+            // vuex保存登录成功的状态
+            this.loginAction(res.data.userInfo);
+
+            // 可以在任何组件内通过 this.$router 访问路由器
+            this.$router.push('/');
+            this.show = false
+          }).catch(err=>{
+            this.show = false;
+            this.$toast.fail('登录状态失败');
+          })
+        }
+        if(res.data.code == 201){
+          this.show = false;
+          this.$toast.fail('登录失败，密码错误');
+        }
+      }).catch(err=>{
+        this.show = false;
+        this.$toast.fail('登录失败');
+      })
     }
   }
 }
 </script>
 <style lang="scss">
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 
+  .block {
+    width: 120px;
+    height: 120px;
+    background-color: #fff;
+  }
 </style>
