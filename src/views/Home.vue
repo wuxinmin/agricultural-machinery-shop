@@ -3,7 +3,7 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <van-nav-bar title="首页" class="commonHeader">
       <van-icon name="search" slot="left" color="#ee0a24"></van-icon>
-      <van-icon slot="right" color="#ee0a24" @click="$router.push('/mine')">{{userInfo.userName}}</van-icon>
+      <van-icon slot="right" color="#ee0a24" @click="$router.push('/mine')">{{JSON.stringify(userInfo) === '{}'?'未登录' : userInfo.userName}}</van-icon>
     </van-nav-bar>
     <!-- 轮播图 -->
      <div class="carousel">
@@ -21,7 +21,8 @@
         <swiper-slide v-for="(item, index) in hotLists" :key="index">
           <div class="hot-swiper-content">
             <img :src="item.dayPictureUrl" :alt="item.weather">
-            <div>皮地方,温度是{{ item.temperature }}</div>
+            <div>农业机械：{{ item.temperature }}</div>
+            <div>￥{{item.price}}</div>
           </div>
         </swiper-slide>
        </swiper>
@@ -34,7 +35,7 @@
            <img :src="item.img" alt="">
            <div class="recommend-list-details">
             <p>{{item.name}}</p>
-            <div>温度是{{item.owner}}</div>
+            <div>商家姓名：{{item.owner}}</div>
             <div>￥{{item.price}}</div>
            </div>
          </li>
@@ -55,47 +56,39 @@
      return {
       carouselItems: [
         {
-          imgSrc: 'https://img01.yzcdn.cn/vant/apple-1.jpg'
+          imgSrc: 'https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00107-2308.jpg'
         },
         {
-          imgSrc: 'https://img01.yzcdn.cn/vant/apple-2.jpg'
+          imgSrc: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2563802065,4210332452&fm=26&gp=0.jpg'
         },
         {
-          imgSrc: 'https://img01.yzcdn.cn/vant/apple-3.jpg'
+          imgSrc: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2821829116,3507426852&fm=26&gp=0.jpg'
         }
       ],
       hotLists: [
         {
-            date: "今天（周三）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/duoyun.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "多云",
-            wind: "微风",
-            temperature: "23℃"
+            dayPictureUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3340981334,1816691981&fm=26&gp=0.jpg",
+            nightPictureUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1605923581,3838751732&fm=26&gp=0.jpg",
+            price: "2003",
+            temperature: "拖拉机"
         },
         {
-            date: "明天（周四）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/leizhenyu.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/zhongyu.png",
-            weather: "雷阵雨转中雨",
-            wind: "微风",
-            temperature: "29～22℃"
+            dayPictureUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1430861001,873381527&fm=26&gp=0.jpg",
+            nightPictureUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1185560750,1315492818&fm=26&gp=0.jpg",
+            price: "600",
+            temperature: "脱粒机"
         },
         {
-            date: "后天（周五）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/yin.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "阴转多云",
-            wind: "微风",
-            temperature: "31～23℃"
+            dayPictureUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2257167586,2457058679&fm=26&gp=0.jpg",
+            nightPictureUrl: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3219331938,1480796438&fm=26&gp=0.jpg",
+            price: "1300",
+            temperature: "收割机"
         },
         {
-            date: "大后天（周六）",
-            dayPictureUrl: "http://api.map.baidu.com/images/weather/day/duoyun.png",
-            nightPictureUrl: "http://api.map.baidu.com/images/weather/night/duoyun.png",
-            weather: "多云",
-            wind: "微风",
-            temperature: "31～24℃"
+            dayPictureUrl: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1795232239,1177195131&fm=26&gp=0.jpg",
+            nightPictureUrl: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1705202326,3050385184&fm=26&gp=0.jpg",
+            price: "2300",
+            temperature: "微耕机"
         }
       ],
       swiperOptions: {

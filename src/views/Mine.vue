@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <van-tabs v-if="userInfo.userName == '未登录'">
+    <van-tabs v-if="JSON.stringify(this.userInfo) == '{}'">
       <van-tab title="登录">
         <!-- required 必填 clearable删除-->
         <van-cell-group>
@@ -58,7 +58,7 @@
         </div>
       </van-tab>
     </van-tabs>
-    <div v-if="userInfo.userName != '未登录'">
+    <div v-if="JSON.stringify(this.userInfo) != '{}'">
       我的
     </div>
   </div>
@@ -137,7 +137,7 @@ export default {
             this.loginAction(res.data.userInfo);
 
             // 可以在任何组件内通过 this.$router 访问路由器
-            this.$router.push('/');
+            this.$router.go(-1);
             this.show = false
           }).catch(err=>{
             this.show = false;

@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: { // 1.用于数据的存储
     // 给池字存放信息
     userInfo: {
-      userName: '未登录' // 默认值
+      // userName: '未登录' // 默认值
     }
   },
   getters: { // 它和vue中的计算属性类似
