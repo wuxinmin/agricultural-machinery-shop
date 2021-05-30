@@ -1,6 +1,6 @@
 // 统一后台配置url
 const MOCKURL = 'http://agricultural.com/'
-const SERVICEURL = 'http://localhost:3000/' // 真实的url
+const SERVICEURL = 'http://192.168.43.111:3000/' // 真实的url
 
 const URL = {
   getRecommendLists: MOCKURL + 'getRecommendLists',
@@ -16,7 +16,11 @@ const URL = {
   // 详情页面接口
   getDetail: SERVICEURL + 'product/getDetail',
   // 加入购物车
-  addCart: SERVICEURL + 'cart/addCart'
+  addCart: SERVICEURL + 'cart/addCart',
+  // 获取购物车信息
+  getCart: SERVICEURL + 'cart/getCart',
+  // 删除购物车信息
+  delCart: SERVICEURL + 'cart/delCart'
 }
 
 // 导出 

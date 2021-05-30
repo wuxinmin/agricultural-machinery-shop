@@ -8,8 +8,8 @@ import store from './store'
 // Vue.use(Vant);
 
 // 按需引入
-import { Button, Icon, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Lazyload, TreeSelect, Card, Stepper,Tab, Tabs, Field, CellGroup, Toast, Loading, Overlay, Col, Row, List, PullRefresh, GoodsAction, GoodsActionIcon, GoodsActionButton} from 'vant';
-Vue.use(Button).use(Icon).use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(TreeSelect).use(Card).use(Stepper).use(Tab).use(Tabs).use(Field).use(CellGroup).use(Toast).use(Loading).use(Overlay).use(Col).use(Row).use(List).use(PullRefresh).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton);
+import { Button, Icon, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Lazyload, TreeSelect, Card, Stepper,Tab, Tabs, Field, CellGroup, Toast, Loading, Overlay, Col, Row, List, PullRefresh, GoodsAction, GoodsActionIcon, GoodsActionButton, SubmitBar} from 'vant';
+Vue.use(Button).use(Icon).use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(TreeSelect).use(Card).use(Stepper).use(Tab).use(Tabs).use(Field).use(CellGroup).use(Toast).use(Loading).use(Overlay).use(Col).use(Row).use(List).use(PullRefresh).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(SubmitBar);
 
 
 Vue.config.productionTip = false
