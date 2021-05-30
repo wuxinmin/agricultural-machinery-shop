@@ -1,6 +1,7 @@
 // 统一后台配置url
 const MOCKURL = 'http://agricultural.com/'
 const SERVICEURL = 'http://192.168.43.111:3000/' // 真实的url
+// const SERVICEURL = 'http://localhost:3000/' // 真实的url
 
 const URL = {
   getRecommendLists: MOCKURL + 'getRecommendLists',

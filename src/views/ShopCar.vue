@@ -67,6 +67,8 @@ export default {
     },
   },
   created() {
+    console.log(1111);
+    console.log(111);
     // 验证用户是否登录
     if (JSON.stringify(this.userInfo) === "{}") {
       this.$toast.fail("请先登录");
@@ -82,7 +84,7 @@ export default {
         },
       })
         .then((res) => {
-          // console.log(res);
+          console.log("111",res);
           for (let item of res.data) {
             this.productList.push(item.productId);
           }

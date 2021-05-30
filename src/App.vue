@@ -26,20 +26,22 @@
         </router-link>
       </li>
     </ul> -->
-    <router-view/>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
     <!-- <footer-bar></footer-bar> -->
     <router-view name="footer-bar"></router-view>
   </div>
 </template>
 
 <script>
-  // import FooterBar from "./components/FooterBar"
-  export default {
-    // components: {
-    //   FooterBar
-    // }
-  };
+// import FooterBar from "./components/FooterBar"
+export default {
+  // components: {
+  //   FooterBar
+  // }
+};
 </script>
 <style lang="scss">
- 
 </style>

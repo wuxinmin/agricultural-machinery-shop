@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="mine">
     <van-tabs v-if="JSON.stringify(this.userInfo) == '{}'">
       <van-tab title="登录">
         <!-- required 必填 clearable删除-->
@@ -21,14 +21,25 @@
           />
         </van-cell-group>
         <div>
-          <van-button style="width:5rem; margin-left:0.7rem; height: 0.7rem; margin-top: 0.6rem;border-radius: 0.3rem;" 
-                      type="primary" 
-                      size="normal" 
-                      @click="loginHandle">登录</van-button>
+          <van-button
+            style="
+              width: 5rem;
+              margin-left: 0.7rem;
+              height: 0.7rem;
+              margin-top: 0.6rem;
+              border-radius: 0.3rem;
+            "
+            type="primary"
+            size="normal"
+            @click="loginHandle"
+            >登录</van-button
+          >
         </div>
         <van-overlay :show="show">
           <div class="wrapper" @click.stop>
-              <van-loading color="#0094ff" text-color="#0094ff" vertical >加载中</van-loading>
+            <van-loading color="#0094ff" text-color="#0094ff" vertical
+              >加载中</van-loading
+            >
           </div>
         </van-overlay>
       </van-tab>
@@ -51,122 +62,167 @@
           />
         </van-cell-group>
         <div>
-          <van-button style="width:5rem; margin-left:0.7rem; height: 0.7rem; margin-top: 0.6rem; border-radius: 0.3rem;" 
-                      type="primary" 
-                      size="normal" 
-                      @click="registHandle">注册</van-button>
+          <van-button
+            style="
+              width: 5rem;
+              margin-left: 0.7rem;
+              height: 0.7rem;
+              margin-top: 0.6rem;
+              border-radius: 0.3rem;
+            "
+            type="primary"
+            size="normal"
+            @click="registHandle"
+            >注册</van-button
+          >
         </div>
       </van-tab>
     </van-tabs>
-    <div v-if="JSON.stringify(this.userInfo) != '{}'">
-      我的
+    <!-- 登录后 -->
+    <div class="logined" v-if="JSON.stringify(this.userInfo) != '{}'">
+      <van-nav-bar title="我的" class="commonHeader"> </van-nav-bar>
+      <img src="../assets/mine.jpg" alt="" />
+      <div class="titleImg">
+        <span style="font-weight"
+          >你好~{{ userInfo.userName }}
+          <p>欢迎来到西北农业机械网</p></span
+        >
+      </div>
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 // 引入总的端口文件 @指的是src
-import url from '@/service.config.js'
+import url from "@/service.config.js";
 // 引入vuex来保存用户登录状态
-import {mapActions} from "vuex"
+import { mapActions } from "vuex";
 // 从vuex中取值
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      loginUsername: '',
-      loginPassword: '',
-      registUsername: '',
-      registPassword: '',
-      show: false
-
+      loginUsername: "",
+      loginPassword: "",
+      registUsername: "",
+      registPassword: "",
+      show: false,
     };
   },
   computed: {
     //  映射mutations写入computed
-     ...mapState(['userInfo'])
+    ...mapState(["userInfo"]),
   },
   methods: {
     // 将store/index.js 中的方法映射出来，想映射那个，映射actions写入methods
-    ...mapActions(['loginAction']),
+    ...mapActions(["loginAction"]),
     // 注册的处理方法
     registHandle() {
       axios({
         url: url.registUser,
-        method: 'post',
+        method: "post",
         // post请求把对应要提交给后端的内容提交给后端
         data: {
           userName: this.registUsername,
-          password: this.registPassword
-        }
-      }).then(res=>{
-        if(res.data.code == 200){
-          this.$toast.success('注册成功');
-          this.registUsername = '';
-          this.registPassword = '';
-        }else{
-          this.$toast.fail('注册失败');  
-        }
-      }).catch(err=>{
-        console.log(err);
-        this.$toast.fail('注册失败');
+          password: this.registPassword,
+        },
       })
+        .then((res) => {
+          if (res.data.code == 200) {
+            this.$toast.success("注册成功");
+            this.registUsername = "";
+            this.registPassword = "";
+          } else {
+            this.$toast.fail("注册失败");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$toast.fail("注册失败");
+        });
     },
 
     // 登录的处理方法
     loginHandle() {
-      this.show = true
+      this.show = true;
       axios({
         url: url.loginUser,
         method: "post",
         data: {
           userName: this.loginUsername,
-          password: this.loginPassword
-        }
-      }).then(res=>{
-        console.log(res);
-        if(res.data.code == 200){
-          // 模拟
-          new Promise((resolve, reject)=>{
-            setTimeout(()=>{
-              resolve();
-            },1000)
-          }).then(()=>{
-            this.$toast.success('登录成功');
-            // vuex保存登录成功的状态
-            this.loginAction(res.data.userInfo);
-
-            // 可以在任何组件内通过 this.$router 访问路由器
-            this.$router.go(-1);
-            this.show = false
-          }).catch(err=>{
-            this.show = false;
-            this.$toast.fail('登录状态失败');
-          })
-        }
-        if(res.data.code == 201){
-          this.show = false;
-          this.$toast.fail('登录失败，密码错误');
-        }
-      }).catch(err=>{
-        this.show = false;
-        this.$toast.fail('登录失败');
+          password: this.loginPassword,
+        },
       })
-    }
-  }
-}
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == 200) {
+            // 模拟
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve();
+              }, 1000);
+            })
+              .then(() => {
+                this.$toast.success("登录成功");
+                // vuex保存登录成功的状态
+                this.loginAction(res.data.userInfo);
+
+                // 可以在任何组件内通过 this.$router 访问路由器
+                this.$router.go(-1);
+                this.show = false;
+              })
+              .catch((err) => {
+                this.show = false;
+                this.$toast.fail("登录状态失败");
+              });
+          }
+          if (res.data.code == 201) {
+            this.show = false;
+            this.$toast.fail("登录失败，密码错误");
+          }
+        })
+        .catch((err) => {
+          this.show = false;
+          this.$toast.fail("登录失败");
+        });
+    },
+  },
+  created() {
+    
+  },
+};
 </script>
 <style lang="scss">
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-  .block {
-    width: 120px;
-    height: 120px;
-    background-color: #fff;
+.block {
+  width: 120px;
+  height: 120px;
+  background-color: #fff;
+}
+.logined {
+  height: 11rem;
+  background: linear-gradient(85deg, #ffe4b5, #ffffff);
+  img {
+    margin-top: 0.92rem;
+    width: 100%;
+    height: 4rem;
+    position: relative;
   }
+}
+.titleImg {
+  width: 100%;
+  // position: absolute;
+  // top: 1.6rem;
+  // z-index: 999;
+  font-weight: bolder;
+  font-size: 0.4rem;
+  color: #888;
+  text-align: center;
+}
 </style>
