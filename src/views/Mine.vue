@@ -85,7 +85,7 @@
       <div class="titleImg">
         <span style="font-weight"
           >你好~{{ userInfo.userName }}
-          <p>欢迎来到西北农业机械网</p></span
+          <p>欢迎来到西北农机APP</p></span
         >
       </div>
     </div>
