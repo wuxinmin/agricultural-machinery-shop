@@ -259,14 +259,12 @@ export default {
 }
 .ad {
   // background-image: image('');
-  height: 11.36rem;
+  height: 14rem;
   width: 100%;
   // background-color: aqua;
-  background-image: url("../assets/ad.jpg");
+  background-image: url("../assets/adBg.jpg");
   position: relative;
   z-index: 999;
-  overflow-x: hidden;
-  overflow-y: hidden;
   background-size: cover;
 
   background-repeat: no-repeat;
