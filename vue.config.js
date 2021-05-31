@@ -4,5 +4,6 @@ module.exports = {
     // 是否自动启动
     devServer: {
         open: true
-    }
+    },
+    publicPath: './'
 }
